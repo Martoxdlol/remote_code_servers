@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  proxy:
+    restart: always
+    image: nginx
+    container_name: nginx
+    volumes:
+      - ./proxy/servers:/etc/nginx/conf.d
+      - ./webroot:/var/www/html
+      - ./certbot/ssl/live/code.abcd.ar/fullchain.pem:/cert/fullchain.pem
+      - ./certbot/ssl/live/code.abcd.ar/privkey.pem:/cert/privkey.pem
+    ports:
+      - "80:80"
+      - "443:443"
+  certbot:
+    container_name: certbot
+    hostname: certbot
+    image: certbot/certbot
+    volumes:
+      - ./certbot/certbot_logs:/var/log/letsencrypt
+      - ./certbot/ssl:/etc/letsencrypt
+      - ./webroot:/var/www/html/
+
+    environment:
+      - 'TZ=${TZ}'
+
+    command: certonly --webroot -w /var/www/html -d ${DOMAIN} --non-interactive --agree-tos --register-unsafely-without-email

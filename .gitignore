@@ -1,0 +1,3 @@
+certbot/ssl
+certbot/certbot_logs
+webroot/.well-known/acme-challenge
