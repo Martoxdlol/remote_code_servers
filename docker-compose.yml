@@ -25,3 +25,51 @@ services:
       - 'TZ=${TZ}'
 
     command: certonly --webroot -w /var/www/html -d ${DOMAIN} --non-interactive --agree-tos --register-unsafely-without-email
+
+  code-server-tomas:
+    build: 
+      dockerfile: ./Dockerfile
+      context: ./code-server
+    volumes:
+      - ./configs/tomas/:/root/.config/code-server/
+      - ./code:/root/code
+      - ./code:/home/coder/code
+      - ./home/tomas:/root/home
+      - ./home/tomas:/home/coder/home
+      - ./webroot:/var/www/html/
+
+  code-server-valeria:
+    build: 
+      dockerfile: ./Dockerfile
+      context: ./code-server
+    volumes:
+      - ./configs/valeria/:/root/.config/code-server/
+      - ./code:/root/code
+      - ./code:/home/coder/code
+      - ./home/valeria:/root/home
+      - ./home/valeria:/home/coder/home
+      - ./webroot:/var/www/html/
+
+  code-server-francisco:
+    build: 
+      dockerfile: ./Dockerfile
+      context: ./code-server
+    volumes:
+      - ./configs/francisco/:/root/.config/code-server/
+      - ./code:/root/code
+      - ./code:/home/coder/code
+      - ./home/francisco:/root/home
+      - ./home/francisco:/home/coder/home
+      - ./webroot:/var/www/html/
+
+  code-server-rodolfo:
+    build: 
+      dockerfile: ./Dockerfile
+      context: ./code-server
+    volumes:
+      - ./configs/rodolfo/:/root/.config/code-server/
+      - ./code:/root/code
+      - ./code:/home/coder/code
+      - ./home/rodolfo:/root/home
+      - ./home/rodolfo:/home/coder/home
+      - ./webroot:/var/www/html/
